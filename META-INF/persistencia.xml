@@ -8,7 +8,10 @@
 <persistence-unit name="loja_rafa" transaction-type="RESOURCE_LOCAL">
 	<properties>
 	
-	<property name="com.mysql.cj.jdbc.Driver" value=" java.sql.Driver"/>
+	<property name="com.mysql.cj.jdbc.Driver" value="java.sql.Driver"/>
+	<property name="com.mysql.cj.jdbc.url" value="jdbc:mysql:loja"/>
+	<property name="com.mysql.cj.jdbc.username" value="root"/>
+	<property name="com.mysql.cj.jdbc.password" value="rafadev1990java"/>
 	
 	</properties>
 </persistence-unit>
