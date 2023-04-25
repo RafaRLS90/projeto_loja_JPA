@@ -30,3 +30,11 @@ public static void main(String[] args) {
 	}	
 	
 }
+
+
+//Informações importantes
+//Transient -> entidade desconhecida
+//Managed -> já conhecida, porém pode ser modificada
+//Detached -> não pode ser modificada, após um clear ou close
+//Commit -> sobe para banco de dados
+//Merge -> posso modficar um detached
