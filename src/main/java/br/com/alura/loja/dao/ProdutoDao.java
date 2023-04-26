@@ -32,6 +32,10 @@ public class ProdutoDao {
 	        return em.createQuery(jpql, Produto.class)
 	        .setParameter("nome", nome)
             .getResultList();
+	        //Caso fosse uma consulta por categoria
+	        //    List<Produto> todos = produtoDao.buscarPorNomeDaCategoria("CELULARES");
+	        //Semelhante ao SQL
+
  }
 
 }
