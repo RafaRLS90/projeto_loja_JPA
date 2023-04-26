@@ -24,6 +24,10 @@ public class Produto {
 	private BigDecimal preco;
 	private LocalDate dataCadastro = LocalDate.now();
 	
+	public Produto() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@ManyToOne
 	private Categoria categoria;
 	
