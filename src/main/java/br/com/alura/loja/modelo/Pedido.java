@@ -22,20 +22,24 @@ public class Pedido {
 	private Long id;
 	private BigDecimal valorTotal;
 	private LocalDate data = LocalDate.now();
-	
+
 	@ManyToOne
 	private Cliente cliente;
-	
+
 	@OneToMany(mappedBy = "pedido")
-	private List<ItemPedido> itens = new ArrayList<>();//inicializando lista
-	
+	private List<ItemPedido> itens = new ArrayList<>();// inicializando lista
+
 	public Pedido() {
-		
+
 	}
-	
+
 	public Pedido(Cliente cliente) {
-		super();
 		this.cliente = cliente;
+	}
+
+	public void adicionarItem(ItemPedido item) {
+		item.setPedido(this); //é usado para referenciar a um atributo externo fora do metodo
+		this.itens.add(item);//lista de itens esta tendo adicionado o item
 	}
 
 	public Long getId() {
@@ -70,5 +74,4 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	
 }
