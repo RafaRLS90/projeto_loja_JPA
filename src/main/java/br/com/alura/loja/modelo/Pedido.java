@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,13 +22,14 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(name = "valor_total")//para nome no banco de dados seguir o nome passado aqui no caso, e não o camelCase abaixo
 	private BigDecimal valorTotal;
 	private LocalDate data = LocalDate.now();
 
 	@ManyToOne
 	private Cliente cliente;
 
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)//cascade, que é para falarmos para fazer o efeito cascata: tudo o que acontecer com o "pedido", faça também no ItemPedido
 	private List<ItemPedido> itens = new ArrayList<>();// inicializando lista
 
 	public Pedido() {
