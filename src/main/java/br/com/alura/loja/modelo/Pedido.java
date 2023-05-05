@@ -23,7 +23,7 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name = "valor_total")//para nome no banco de dados seguir o nome passado aqui no caso, e não o camelCase abaixo
-	private BigDecimal valorTotal;
+	private BigDecimal valorTotal = BigDecimal.ZERO;
 	private LocalDate data = LocalDate.now();
 
 	@ManyToOne
@@ -43,6 +43,7 @@ public class Pedido {
 	public void adicionarItem(ItemPedido item) {
 		item.setPedido(this); //é usado para referenciar a um atributo externo fora do metodo
 		this.itens.add(item);//lista de itens esta tendo adicionado o item
+		this.valorTotal = this.valorTotal.add(item.getValor());
 	}
 
 	public Long getId() {

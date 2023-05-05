@@ -1,5 +1,6 @@
 package br.com.alura.loja.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,6 +18,8 @@ public class ProdutoDao {
 	        this.em.persist(produto);
 	    }
 	    
+
+
 	    public Produto buscarPorId(Long id) {
 	    	return em.find(Produto.class, id);
 	    	
