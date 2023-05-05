@@ -14,7 +14,7 @@ import br.com.alura.loja.util.JPAUtil;
 public class CadastroDeProduto {
 	
 public static void main(String[] args) {
-	cadastrarProduto();
+	popularBandoDeDados();
 	EntityManager em = JPAUtil.getEntityManager();
 	ProdutoDao produtoDao = new ProdutoDao(em);
 	
@@ -25,7 +25,7 @@ public static void main(String[] args) {
 	todos.forEach(p2 -> System.out.println(p2.getNome()));
 	}
 
-private static void cadastrarProduto() {
+private static void popularBandoDeDados() {
 	Categoria celulares = new Categoria("CELULARES");
 	Produto celular = new Produto("Xiaomi Redmi","Muito legal", new BigDecimal("800"), celulares);
 	
