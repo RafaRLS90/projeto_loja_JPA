@@ -15,6 +15,7 @@ import br.com.alura.loja.modelo.ItemPedido;
 import br.com.alura.loja.modelo.Pedido;
 import br.com.alura.loja.modelo.Produto;
 import br.com.alura.loja.util.JPAUtil;
+import br.com.alura.loja.vo.RelatorioDeVendasVo;
 
 public class CadastroDePedido {
 
@@ -47,13 +48,10 @@ public class CadastroDePedido {
 		BigDecimal totalVendido = pedidoDao.valorTotalVendido();
 		System.out.println("Valor total: " + totalVendido);
 		
-		List<Object[]> relatorio = pedidoDao.relatorioDeVendas();
-		for (Object[] obj : relatorio) {
-			System.out.println(obj[0]);
-			System.out.println(obj[1]);
-			System.out.println(obj[2]);
+		List<RelatorioDeVendasVo> relatorio = pedidoDao.relatorioDeVendas();
+		relatorio.forEach(System.out::println);
 		}
-	}
+
 
 	private static void cadastrarProduto() {
 		Categoria celulares = new Categoria("CELULARES");
