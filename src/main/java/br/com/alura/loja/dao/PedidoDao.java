@@ -38,4 +38,10 @@ public class PedidoDao {
 	    	return em.createQuery(jpql, RelatorioDeVendasVo.class)//lista de objetos que contem string, int e um local date
 	    	.getResultList();
 	    }
+	    
+	    public Pedido buscarPedidoComCliente(Long id) {
+	    	return em.createQuery("SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.id = :id", Pedido.class)
+	    			.setParameter("id", id)
+	    			.getSingleResult();
+	    }
 }
