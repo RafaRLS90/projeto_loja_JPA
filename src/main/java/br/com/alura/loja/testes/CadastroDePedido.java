@@ -20,9 +20,8 @@ import br.com.alura.loja.vo.RelatorioDeVendasVo;
 public class CadastroDePedido {
 
 	public static void main(String[] args) {
-		cadastrarProduto();//salvei a categoria produto no banco de dados
-		
-		EntityManager em = JPAUtil.getEntityManager();//recuperei o produto recem salvo do banco de dados
+		popularBancoDeDados();
+		EntityManager em = JPAUtil.getEntityManager();
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		ClienteDao clienteDao = new ClienteDao(em);
 		
@@ -33,36 +32,37 @@ public class CadastroDePedido {
 		
 		em.getTransaction().begin();
 		
-		Pedido pedido = new Pedido(cliente);//criando o pedido
-		pedido.adicionarItem(new ItemPedido(10, pedido, produto));//adicionando item
+		Pedido pedido = new Pedido(cliente);
+		pedido.adicionarItem(new ItemPedido(10, pedido, produto));
 		pedido.adicionarItem(new ItemPedido(40, pedido, produto2));
-		
+
 		Pedido pedido2 = new Pedido(cliente);
-		pedido.adicionarItem(new ItemPedido(2, pedido, produto3));
+		pedido2.adicionarItem(new ItemPedido(2, pedido2, produto3));
 		
 		PedidoDao pedidoDao = new PedidoDao(em);
 		pedidoDao.cadastrar(pedido);
+		pedidoDao.cadastrar(pedido2);
 		
 		em.getTransaction().commit();
 		
 		BigDecimal totalVendido = pedidoDao.valorTotalVendido();
-		System.out.println("Valor total: " + totalVendido);
+		System.out.println("VALOR TOTAL: " +totalVendido);
+		
 		
 		List<RelatorioDeVendasVo> relatorio = pedidoDao.relatorioDeVendas();
 		relatorio.forEach(System.out::println);
-		}
-
-
-	private static void cadastrarProduto() {
+	}
+	
+	private static void popularBancoDeDados() {
 		Categoria celulares = new Categoria("CELULARES");
 		Categoria videogames = new Categoria("VIDEOGAMES");
 		Categoria informatica = new Categoria("INFORMATICA");
 		
-		Produto celular = new Produto("Xiaomi Redmi","Muito legal", new BigDecimal("800"), celulares);
-		Produto videogame = new Produto("PS5","Playstation 5", new BigDecimal("4000"), videogames);
-		Produto macbook = new Produto("Macbook","Mac pro", new BigDecimal("5000"), informatica);
+		Produto celular = new Produto("Xiaomi Redmi", "Muito legal", new BigDecimal("800"), celulares);
+		Produto videogame = new Produto("PS5", "Playstation 5", new BigDecimal("8000"), videogames);
+		Produto macbook = new Produto("Macbook", "Macboo pro retina", new BigDecimal("14000"), informatica);
 		
-		Cliente cliente = new Cliente("Rodrigo" , "123456");//criando o cliente
+		Cliente cliente = new Cliente("Rodrigo", "123456");
 		
 		EntityManager em = JPAUtil.getEntityManager();
 		ProdutoDao produtoDao = new ProdutoDao(em);
@@ -82,8 +82,7 @@ public class CadastroDePedido {
 		clienteDao.cadastrar(cliente);
 		
 		em.getTransaction().commit();
-		
 		em.close();
-	}	
-	
+	}
+
 }
