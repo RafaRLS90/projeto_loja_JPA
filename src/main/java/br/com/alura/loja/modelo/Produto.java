@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +13,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "produtos") // ensinando o JPA a reconhecer o nome para buscar na tabela
-@NamedQuery(name = "Produto.produtosPorCategoria", query = "SELECT p FROM Produto p WHERE p.nome = :nome")
+@Table(name = "produtos")
+@NamedQuery(name = "Produto.produtosPorCategoria", query = "SELECT p FROM Produto p WHERE p.categoria.nome = :nome")
 public class Produto {
 
 	@Id
@@ -26,22 +24,14 @@ public class Produto {
 	private String descricao;
 	private BigDecimal preco;
 	private LocalDate dataCadastro = LocalDate.now();
-	
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Categoria categoria;
-	
-	
-	public Produto() {
-		// TODO Auto-generated constructor stub
-	}
-	
 
-	
-	
+	public Produto() {
+	}
 
 	public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria) {
-		super();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;
